@@ -44,4 +44,29 @@ class Utils {
         c.drawBitmap(bmpOriginal, 0f, 0f, paint)
         return bmpGrayscale
     }
+
+    /**
+     * A native method that is implemented by the 'native-lib' native library,
+     * which is packaged with this application.
+     */
+    private external fun floydSteinbergBWRNative(bmp: Bitmap)
+
+
+    /**
+     * A native method that is implemented by the 'native-lib' native library,
+     * which is packaged with this application.
+     */
+    private external fun binaryBlackWhiteRedNative(bmp: Bitmap)
+
+    fun floydSteinbergDitheringBWR(originalColorBitmap: Bitmap): Bitmap {
+        val copied = originalColorBitmap.copy(originalColorBitmap.config, true)
+        floydSteinbergBWRNative(copied)
+        return copied
+    }
+
+    fun binaryBlackWhiteRed(originalColorBitmap: Bitmap): Bitmap {
+        val copied = originalColorBitmap.copy(originalColorBitmap.config, true)
+        binaryBlackWhiteRedNative(copied)
+        return copied
+    }
 }
